@@ -1,7 +1,7 @@
 const contentsContainer = document.querySelector(".contents-container");
 const teamNames = [
   "Kipi",
-  "The:G",
+  "The 地",
   "팀 쿠키",
   "도참없",
   "Surplus",
@@ -29,6 +29,7 @@ for (let i = 0; i < teamNames.length; i++) {
 
   contentsContainer.appendChild(button);
 }
+
 const introContainer = document.querySelector(".intro-container");
 const folderImg = document.querySelectorAll(".folder-img");
 const deleteBtn = document.querySelectorAll(".content-delete-button");
@@ -196,3 +197,30 @@ deleteBtn[9].addEventListener("click", () => {
     introContainer.classList.remove("visible");
   }, 0);
 });
+
+const timeText = document.querySelector(".iphone-time");
+const today = new Date();
+const dDay = new Date("2023-07-28:13:00:00+0900");
+const hourLeft = document.querySelector(".timer-hours");
+const minutesLeft = document.querySelector(".timer-minutes");
+const dayLeft = document.querySelector(".d-day");
+const timeHours = today.getHours();
+const timeMinutes = today.getMinutes();
+function diffDay() {
+  const diff = dDay - today;
+  const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const diffMin = Math.floor((diff / (1000 * 60)) % 60);
+  if (diffDay == 0) {
+    dayLeft.textContent = "D-Day";
+  } else {
+    dayLeft.textContent = `D - ${diffDay}`;
+  }
+}
+
+const timerInit = () => {
+  diffDay();
+  setInterval(diffDay, 1000);
+};
+
+timerInit();
